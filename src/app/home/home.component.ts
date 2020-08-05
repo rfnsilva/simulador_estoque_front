@@ -31,7 +31,7 @@ export class HomeComponent implements OnInit {
   public verify_receita: boolean = false;
 
   constructor(private http : HttpClient, private r: Router){
-    this.apiURL = 'https://simulador-estoque.herokuapp.com/';
+    this.apiURL = 'https://simulador-estoque.herokuapp.com';
     this.rota = r;
   }
 

@@ -25,7 +25,7 @@ export class FornecedoresComponent implements OnInit {
   public fornecedores: any;
 
   constructor(private http : HttpClient, private r: Router){
-    this.apiURL = 'https://simulador-estoque.herokuapp.com/';
+    this.apiURL = 'https://simulador-estoque.herokuapp.com';
     this.rota = r;
   }
 
