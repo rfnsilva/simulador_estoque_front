@@ -24,7 +24,7 @@ export class CategoriasComponent implements OnInit {
   public categorias: any;
 
   constructor(private http : HttpClient, private r: Router){
-    this.apiURL = 'http://localhost:3333';
+    this.apiURL = 'https://simulador-estoque.herokuapp.com/';
     this.rota = r;
   }
 
