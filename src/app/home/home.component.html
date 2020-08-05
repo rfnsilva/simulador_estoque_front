@@ -1,0 +1,220 @@
+<div class="nav-right visible-xs">
+  <div class="button" id="btn">
+    <div class="bar top"></div>
+    <div class="bar middle"></div>
+    <div class="bar bottom"></div>
+  </div>
+</div>
+<!-- nav-right -->
+
+<!-- Page Content -->
+<main>
+  <nav>
+    <div class="nav-right hidden-xs">
+      <div class="button" id="btn">
+        <div class="bar top"></div>
+        <div class="bar middle"></div>
+        <div class="bar bottom"></div>
+      </div>
+    </div>
+  </nav>
+  
+  <ng-template [ngIf]="verify_receita" [ngIfElse]="else_verify_receita">
+    <div style="margin-top: 55px;" class="row">
+      <div class="col-sm col-md col-lg">
+        <button data-toggle="modal" data-target="#exampleModal6" class="btn btn-secondary" style="float: right;margin-right: 18px;background-color: #EF8354;">Tutorial</button>
+      </div>
+    </div>
+  
+    <div class="row" style="margin-top: 47px;">
+      <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="face face1">
+              <div class="content">
+                  <div class="">
+                    <h3 style="color: #fff;">Receita</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="face face2">
+              <div class="content">
+                <h3>
+                  Total:
+                </h3>
+                <p>${{receita[0].valor}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="face face1">
+              <div class="content">
+                  <div class="">
+                    <h3 style="color: #fff;">Contas</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="face face2">
+              <div class="content">
+                  <h3>
+                    Total:
+                  </h3>
+                  <p>${{soma}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-4 col-md-4 col-lg-4">
+        <div class="card">
+          <div class="face face1">
+              <div class="content">
+                  <div class="">
+                    <h3 style="color: #fff;">Estoque</h3>
+                  </div>
+              </div>
+          </div>
+          <div class="face face2">
+              <div class="content">
+                <h3>
+                  Valor:
+                </h3>
+                <p>${{qtd_soma_estoque?.soma_valor_prod}}</p>
+                <h3>
+                  Quant:
+                </h3>
+                <p>${{qtd_soma_estoque?.qtd_prod}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /#page-content-wrapper -->
+  </ng-template>
+  <ng-template #else_verify_receita>
+    <button style="margin: 0 50%;" data-toggle="modal" data-target="#exampleModal3" class="btn btn-secondary">COMEÇAR</button>
+  </ng-template>
+</main>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ng-template [ngIf]="verify_receita">
+    <ul class="sidebar-list">
+      <li style="margin-bottom: 50px;" class="sidebar-item"><a [routerLink]="['/home']" class="sidebar-anchor">Home</a></li>
+      <li class="sidebar-item css-config-title">Estoque</li>
+      <li class="sidebar-item"><a [routerLink]="['/produtos']" class="sidebar-anchor" style="font-size: 1.3em;">Produtos</a></li>
+      <li class="sidebar-item"><a [routerLink]="['/categorias']" class="sidebar-anchor" style="font-size: 1.3em;">Categorias</a></li>
+      <li class="sidebar-item css-config-title">Fornecedores</li>
+      <li class="sidebar-item"><a [routerLink]="['/fornecedores']" class="sidebar-anchor" style="font-size: 1.3em;">Lista</a></li>
+      <li class="sidebar-item"><a [routerLink]="['/contas']" class="sidebar-anchor" style="font-size: 1.3em;">Contas</a></li><br />
+      
+      <button style="background-color: #2d3142;" data-toggle="modal" data-target="#exampleModal5" class="btn btn-secondary">simular compra</button><br />
+      <button (click)="delete()" style="margin-top: 5px;background-color: #2d3142;" class="btn btn-secondary">deletar tudo</button>
+    </ul>
+  </ng-template>
+</div>
+<!-- /#sidebar-wrapper -->
+
+
+<!--MODALS-->
+<!--adicionar-->
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar receita</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+          <div class="form-group">
+            <label>Valor</label>
+            <input formControlName="valor" type="number" class="form-control">
+          </div>
+
+          <button type="button" class="btn btn-secondary botao" data-dismiss="modal">Fechar</button>
+          <button type="submit" [disabled]="!profileForm.valid" name="button" class="btn btn-primary botao">adicionar</button>
+        </form>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--tutorial-->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">primeiro passo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Para começar a testar a aplicação é necessario criar uma receita, que será usada por vc nos proximos passos, é necessário ter receita para adicionar os produtos.<br />Para vê os proximos passos do tutorial clique no botão(tutorial).<br /> Clique em adicionar para prosseguir.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        <button data-toggle="modal" data-target="#exampleModal4" data-dismiss="modal" type="button" class="btn btn-primary">Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">segundo passo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Agora é necessário adicionar uma ou mais categorias, seus produtos perteceram àlguma delas.<br />Para adicionar uma categória acesse o menu lateral e clique em categorias.<br />Proximo passo na tela de categorias!<br />Depois de seguir o tutorial por completo e ter adicionado os produtos vc pode simular uma compra. Para isso acesse o menu laterale clique em simular compra. Ao cliue irá aparecer um modal, insira o id do produto que deseja compra e clique em comprar, logo que fazer isso seu estoque será atualizado assim como a valor da venda será acrescido a sua receita. Atualize a pagina para vê as atualizações. O produto vendido tbm será eliminado da tabela de produtos!</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--Simular compra-->
+<div class="modal fade" id="exampleModal5" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Simulador de compras</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit1()">
+
+          <div class="form-group">
+            <label>Id do produto</label>
+            <input formControlName="valor" type="text" class="form-control">
+          </div>
+
+          <button type="button" class="btn btn-secondary botao" data-dismiss="modal">Fechar</button>
+          <button type="submit" [disabled]="!profileForm.valid" name="button" class="btn btn-primary botao">Comprar</button>
+        </form>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODALS-->

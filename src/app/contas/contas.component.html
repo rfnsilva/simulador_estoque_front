@@ -1,0 +1,125 @@
+
+<div class="nav-right visible-xs">
+  <div class="button" id="btn">
+    <div class="bar top"></div>
+    <div class="bar middle"></div>
+    <div class="bar bottom"></div>
+  </div>
+</div>
+<!-- nav-right -->
+
+<!-- Page Content -->
+<main>
+  <nav>
+    <div class="nav-right hidden-xs">
+      <div class="button" id="btn">
+        <div class="bar top"></div>
+        <div class="bar middle"></div>
+        <div class="bar bottom"></div>
+      </div>
+    </div>
+  </nav>
+
+
+  <div style="margin-top: 55px;" class="row">
+    <div class="col-sm col-md col-lg">
+      <button data-toggle="modal" data-target="#exampleModal6" class="btn btn-secondary" style="float: right;margin-right: 18px;background-color: #EF8354;">Informações</button>
+    </div>
+  </div>
+
+  <div class="container-fluid table-responsive">
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Fornecedor</th>
+          <th scope="col">Ação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let conta of contas">
+          <td id="id_corte">{{ conta?.id }}</td>
+          <td id="id_corte">{{ conta?.valor }}</td>
+          <td id="id_corte">{{ conta?.fornecedor?.nome }}</td>
+          <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                <button type="button" (click)="Adicionar(conta?.id, conta?.valor)" data-toggle="modal" data-target="#exampleModal1" class="btn btn-secondary">pagar</button>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul class="sidebar-list">
+    <li style="margin-bottom: 50px;" class="sidebar-item"><a [routerLink]="['/home']" class="sidebar-anchor">Home</a></li>
+    <li class="sidebar-item css-config-title">Estoque</li>
+    <li class="sidebar-item"><a [routerLink]="['/produtos']" class="sidebar-anchor" style="font-size: 1.3em;">Produtos</a></li>
+    <li class="sidebar-item"><a [routerLink]="['/categorias']" class="sidebar-anchor" style="font-size: 1.3em;">Categorias</a></li>
+    <li class="sidebar-item css-config-title">Fornecedores</li>
+    <li class="sidebar-item"><a [routerLink]="['/fornecedores']" class="sidebar-anchor" style="font-size: 1.3em;">Lista</a></li>
+    <li class="sidebar-item"><a [routerLink]="['/contas']" class="sidebar-anchor" style="font-size: 1.3em;">Contas</a></li><br />
+    
+    <button style="background-color: #2d3142;" data-toggle="modal" data-target="#exampleModal5" class="btn btn-secondary">simular compra</button><br />
+  </ul>
+</div>
+<!-- /#sidebar-wrapper -->
+
+  <!--MODALS-->
+
+<!--edit-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+          
+          <div class="form-group">
+            <label>Id</label>
+            <input disabled="" value="{{modal_conta_id}}" name="valor" type="text" class="form-control">
+          
+            <label>valor a pagar</label>
+            <input formControlName="valor" name="valor" type="number" class="form-control">
+          </div>
+
+          <button id="edit" type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+          <button id="edit" type="submit" [disabled]="!profileForm.valid" name="button" class="btn btn-primary">Pagar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--TUTORIAL-->
+<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Informações sobre as contas</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Cada conta dessas está ligada a um fornecedor especifico, assim que um fornecedor é adicionado criamos uma linha aqui para guardar Informações a respeito dos saldos devidos a eles.<br />Sempre que adicionarmos um produto sera acrescido o valor do msm ao saldo devido ao fornecedor do produto<br />Para pagar basta clicar no botao pagar e informar o valor. Logo que confirmar o pagamento sera diminuido seu saldo devedor e sua receita tbm diminuirá. Para isso adicione pelo menos um produto para que o saldo n fique zerado. Assim que tiver saldo devedor realize um pagamento para testar, vc verá que o saldo atualizará na hora, no home page tbm estará atualizado.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODALS-->

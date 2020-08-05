@@ -1,0 +1,207 @@
+
+<div class="nav-right visible-xs">
+  <div class="button" id="btn">
+    <div class="bar top"></div>
+    <div class="bar middle"></div>
+    <div class="bar bottom"></div>
+  </div>
+</div>
+<!-- nav-right -->
+
+<!-- Page Content -->
+<main>
+  <nav>
+    <div class="nav-right hidden-xs">
+      <div class="button" id="btn">
+        <div class="bar top"></div>
+        <div class="bar middle"></div>
+        <div class="bar bottom"></div>
+      </div>
+    </div>
+  </nav>
+  <div style="margin-top: 55px;" class="row">
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+      <button data-toggle="modal" data-target="#exampleModal4" class="btn btn-secondary" style="float: right;margin-right: 18px;background-color: #EF8354;">adicionar</button>
+    </div>
+
+    <div class="col-6 col-sm-6 col-md-6 col-lg-6">
+      <button data-toggle="modal" data-target="#exampleModal6" class="btn btn-secondary" style="float: right;margin-right: 18px;background-color: #EF8354;">Tutorial</button>
+    </div>
+  </div>
+  
+  <div style="margin-top: 10px;" class="container-fluid table-responsive">
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Categoria</th>
+          <th scope="col">Fornecedor</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let produto of produtos">
+          <th id="id_corte" scope="row">{{ produto?.id }}</th>
+          <td id="id_corte1">{{ produto?.nome }}</td>
+          <td id="id_corte1">{{ produto?.preco }}</td>
+          <td id="id_corte1">{{ produto?.categoria?.nome }}</td>
+          <td id="id_corte1">{{ produto?.fornecedor?.nome }}</td>
+          <td>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" (click)="Adicionar(1, produto?.id, produto?.nome, produto?.preco, produto?.categoria, produto?.fornecedor)" data-toggle="modal" data-target="#exampleModal1" class="btn btn-secondary">edit</button>
+                  <button type="button" (click)="Adicionar(2, produto?.id, produto?.nome, produto?.preco, produto?.categoria, produto?.fornecedor)" data-toggle="modal" data-target="#exampleModal2" class="btn btn-secondary">del</button>
+                  <button type="button" (click)="Adicionar(3, produto?.id, produto?.nome, produto?.preco, produto?.categoria, produto?.fornecedor)" data-toggle="modal" data-target="#exampleModal3" class="btn btn-secondary">detalhes</button>
+              </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<!-- /#page-content-wrapper -->
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <ul class="sidebar-list">
+    <li style="margin-bottom: 50px;" class="sidebar-item"><a [routerLink]="['/home']" class="sidebar-anchor">Home</a></li>
+    <li class="sidebar-item css-config-title">Estoque</li>
+    <li class="sidebar-item"><a [routerLink]="['/produtos']" class="sidebar-anchor" style="font-size: 1.3em;">Produtos</a></li>
+    <li class="sidebar-item"><a [routerLink]="['/categorias']" class="sidebar-anchor" style="font-size: 1.3em;">Categorias</a></li>
+    <li class="sidebar-item css-config-title">Fornecedores</li>
+    <li class="sidebar-item"><a [routerLink]="['/fornecedores']" class="sidebar-anchor" style="font-size: 1.3em;">Lista</a></li>
+    <li class="sidebar-item"><a [routerLink]="['/contas']" class="sidebar-anchor" style="font-size: 1.3em;">Contas</a></li><br />
+    
+    <button style="background-color: #2d3142;" data-toggle="modal" data-target="#exampleModal5" class="btn btn-secondary">simular compra</button><br />
+  </ul>
+</div>
+<!-- /#sidebar-wrapper -->
+
+
+<!--MODALS-->
+
+<!--edit-->
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+              <label>ID</label>
+              <input disabled="" type="text" value="{{modal_id}}" class="form-control">
+              <br />
+              <label>Nome</label>
+              <input formControlName="nome" name="nome" type="text" class="form-control" value="{{modal_nome}}" aria-describedby="nome" placeholder="Seu nome">
+              <label>Preço</label>
+              <input formControlName="preco" name="preco" type="text" class="form-control" value="{{modal_preco}}" aria-describedby="nome" placeholder="Seu nome">
+              <label>Categoria</label>
+              <input formControlName="categoriaId" name="categoria" type="text" class="form-control" value="{{modal_categoria?.nome}}" aria-describedby="nome" placeholder="Seu nome">
+              <label>Fornecedor</label>
+              <input formControlName="fornecedorId" name="fornecedor" type="text" class="form-control" value="{{modal_fornecedor?.nome}}" aria-describedby="nome" placeholder="Seu nome">
+            </div>
+
+            <button type="button" class="btn btn-secondary botao" data-dismiss="modal">Fechar</button>
+            <button type="submit" [disabled]="!profileForm.valid" name="button" class="btn btn-primary botao">Salvar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--detalhes-->
+<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Detalhes</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label>ID</label>
+          <input disabled="" type="text" value="{{modal_id}}" class="form-control">
+          <br />
+          <label>Nome</label>
+          <input disabled="" type="text" value="{{modal_nome}}" class="form-control">
+          <br />
+          <label>Preço</label>
+          <input disabled="" type="text" value="{{modal_preco}}" class="form-control">
+          <br />
+          <label>Categoria</label>
+          <input disabled="" type="text" value="{{modal_categoria?.nome}}" class="form-control">
+          <br />
+          <label>Fornecedor</label>
+          <input disabled="" type="text" value="{{modal_fornecedor?.nome}}" class="form-control">
+          <br />
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!--adicionar-->
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Adicionar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="profileForm" (ngSubmit)="onSubmit1()">
+
+          <div class="form-group">
+            <label>Nome</label>
+            <input formControlName="nome" type="text" value="" class="form-control">
+            <label>Preço</label>
+            <input formControlName="preco" type="text" value="" class="form-control">
+            <label>Categoria</label>
+            <input formControlName="categoriaId" type="text" value="" class="form-control">
+            <label>Fornecedor</label>
+            <input formControlName="fornecedorId" type="text" value="" class="form-control">
+        </div>
+
+          <button type="button" class="btn btn-secondary botao" data-dismiss="modal">Fechar</button>
+          <button type="submit" [disabled]="!profileForm.valid" name="button" class="btn btn-primary botao">Salvar</button>
+        </form>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--TUTORIAL-->
+<div class="modal fade" id="exampleModal6" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">quinto passo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <p>Clique em adicionar e insira o nome, preço, categoria e fornecedor do produto. Assim que o produto for inserido sua receita irá aumentar, e seu saldo devedor tbm com o fornecedor do produto adicionado, entao logo que adicionar o produto volte na pagina home e verifique as informaçoes la atualizadaas a cerca de receita, contas e estoque de produtos.</p>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Entendi</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIM MODALS-->
