@@ -1,5 +1,5 @@
-<h1 align="center"> Login, Registro, e forgot </h1>
-<h4 align="center"> Projeto com foco nas funcionalidades de registrar/logar e recuperação de senha </h4><br />
+<h1 align="center"> Simulador de estoque </h1>
+<h4 align="center"> Projeto com foco nas funcionalidades de gerenciar estoque como adicionar categorias, fornecedores, receita, opção de contas a pagar etc... </h4><br />
 
 <h2 align="center"> Tecnologias usadas <span>FRONT-END</span> </h2>
 <h4 align="center"> Angular 2+, HTML5, CSS3/SCSS </h4><br />
