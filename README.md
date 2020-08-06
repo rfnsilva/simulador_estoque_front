@@ -9,7 +9,7 @@
 <p align="center">
 <img src="https://img.shields.io/static/v1?label=angular&message=SERVE&color=red&style=for-the-badge&logo=ANGULAR"/>
 </p>
-<h4 align="center"> basta executar no terminal ng server e acessar o localost:4200 </h4><br />
+<h4 align="center"> basta executar no terminal ng server e acessar o localhost:4200 </h4><br />
 
 <p align="center">
 <img src="https://img.shields.io/static/v1?label=angular&message=BUILD&color=red&style=for-the-badge&logo=ANGULAR"/>
