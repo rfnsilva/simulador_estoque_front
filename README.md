@@ -34,4 +34,4 @@
 </p><br />
 
 <h2 align="center"> Deploy da Aplicação com Netlify: :dash: </h2>
-<h4 align="center"> https://elegant-hopper-47eba8.netlify.app/home</h4>
+<h4 align="center"> https://elegant-hopper-47eba8.netlify.app/</h4>
